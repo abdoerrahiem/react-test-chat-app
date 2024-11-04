@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from './GlobalStyle'
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary'
+import Home from './pages/Home'
+import ChatPage from './pages/ChatPage'
+import { ChatProvider } from './context/ChatContext'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <Router>
+    <GlobalStyle />
+    <ChatProvider>
+      <ErrorBoundary>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/chat' element={<ChatPage />} />
+        </Routes>
+      </ErrorBoundary>
+    </ChatProvider>
+  </Router>
+)
 
-export default App;
+export default App
